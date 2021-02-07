@@ -1,5 +1,7 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess;
+using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Concrete.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +18,11 @@ namespace DataAccess.Concrete.InMemory
         {
             _cars = new List<Car>
             {
-                new Car{Id = 1, BrandId = 1, ColorId = 1, ModelYear = "2014", DailyPrice = 350, CarDescription = "Motor Hacmi 2001 - 2500 cm3" },
-                new Car{Id = 2, BrandId = 2, ColorId = 2, ModelYear = "2018", DailyPrice = 80, CarDescription = "Motor Hacmi 1401 - 1600 cm3" },
-                new Car{Id = 3, BrandId = 3, ColorId = 1, ModelYear = "2018", DailyPrice = 500, CarDescription = "Motor Hacmi 1601 - 1800 cm3" },
-                new Car{Id = 4, BrandId = 4, ColorId = 3, ModelYear = "2017", DailyPrice = 120, CarDescription = "Motor Hacmi 1301 - 1400 cm3" },
-                new Car{Id = 5, BrandId = 5, ColorId = 2, ModelYear = "2016", DailyPrice = 120, CarDescription = "Motor Hacmi 1401 - 1600 cm3" },
+                new Car{CarId = 1, BrandId = 1, ColorId = 1, ModelYear = "2014", DailyPrice = 350, CarDescription = "Motor Hacmi 2001 - 2500 cm3" },
+                new Car{CarId = 2, BrandId = 2, ColorId = 2, ModelYear = "2018", DailyPrice = 80, CarDescription = "Motor Hacmi 1401 - 1600 cm3" },
+                new Car{CarId = 3, BrandId = 3, ColorId = 1, ModelYear = "2018", DailyPrice = 500, CarDescription = "Motor Hacmi 1601 - 1800 cm3" },
+                new Car{CarId = 4, BrandId = 4, ColorId = 3, ModelYear = "2017", DailyPrice = 120, CarDescription = "Motor Hacmi 1301 - 1400 cm3" },
+                new Car{CarId = 5, BrandId = 5, ColorId = 2, ModelYear = "2016", DailyPrice = 120, CarDescription = "Motor Hacmi 1401 - 1600 cm3" },
             };
         }
 
@@ -31,7 +33,7 @@ namespace DataAccess.Concrete.InMemory
 
         public void Delete(Car car)
         {
-            Car carToDelete = _cars.SingleOrDefault(c => c.Id == car.Id);
+            Car carToDelete = _cars.SingleOrDefault(c => c.CarId == car.CarId);
         }
 
         public List<Car> Get(Expression<Func<Car, bool>> filter)
@@ -51,12 +53,17 @@ namespace DataAccess.Concrete.InMemory
 
         public List<Car> GetById(int Id)
         {
-            return _cars.Where(c => c.Id == Id).ToList();
+            return _cars.Where(c => c.CarId == Id).ToList();
+        }
+
+        public List<CarDetailDto> GetCarDetail()
+        {
+            throw new NotImplementedException();
         }
 
         public void Update(Car car)
         {
-            Car carToUpdate = _cars.SingleOrDefault(c => c.Id == car.Id);
+            Car carToUpdate = _cars.SingleOrDefault(c => c.CarId == car.CarId);
             carToUpdate.BrandId = car.BrandId;
             carToUpdate.ColorId = car.ColorId;
             carToUpdate.ModelYear = car.ModelYear;
