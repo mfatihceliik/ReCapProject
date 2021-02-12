@@ -13,13 +13,32 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new CarDal());
 
+            var result = carManager.GetCarDetails();
+
+            if (result.Success)
+            {
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarId + " / " + car.BrandName + " / " + car.ColorName + " / " + car.DailyPrice);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
+            //GetCarDetailsOperation(carManager);
+            //DeleteCarOperation(carManager);
+        }
+
+        /*private static void GetCarDetailsOperation(CarManager carManager)
+        {
             foreach (var cars in carManager.GetCarDetails())
             {
                 Console.WriteLine(cars.CarId + " / " + cars.BrandName + " / " + cars.ColorName + " / " + cars.DailyPrice);
             }
-
-            //DeleteCarOperation(carManager);
-        }
+        }*/
 
         private static void DeleteCarOperation(CarManager carManager)
         {
