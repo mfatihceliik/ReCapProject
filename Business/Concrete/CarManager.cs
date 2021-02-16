@@ -18,7 +18,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public IResult AddCar(Car car)
+        public IResult Add(Car car)
         {
             if(DateTime.Now.Hour == 22)
             {
@@ -28,7 +28,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarAdded);
         }
 
-        public IResult DeleteCar(Car car)
+        public IResult Delete(Car car)
         {
             if(DateTime.Now.Hour == 22)
             {
@@ -75,7 +75,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.CarId == carId));
         }
 
-        public IResult UpdateCar(Car car)
+        public IResult Update(Car car)
         {
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);

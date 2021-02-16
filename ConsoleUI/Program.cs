@@ -117,7 +117,7 @@ namespace ConsoleUI
                 DailyPrice = 150,
                 CarDescription = "Motor Hacmi 1601 - 1800 cm3",
             };
-            carManager.DeleteCar(car);
+            carManager.Delete(car);
         }
     }
 }
