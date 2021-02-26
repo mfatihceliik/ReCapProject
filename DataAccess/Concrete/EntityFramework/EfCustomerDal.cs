@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccess.Concrete.RentACar
+namespace DataAccess.Concrete.EntityFramework
 {
-    public class UserDal : EfEntityRepositoryBase<User, RentACarContext>, IUserDal
+    public class EfCustomerDal : EfEntityRepositoryBase<Customer, EfRentACarContext>, ICustomerDal
     {
 
     }

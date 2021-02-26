@@ -9,13 +9,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DataAccess.Concrete.RentACar
+namespace DataAccess.Concrete.EntityFramework
 {
-    public class CarDal : EfEntityRepositoryBase<Car, RentACarContext>, ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, EfRentACarContext>, ICarDal
     {
         public List<CarDetailDto> GetCarDetail()
         {
-            using (RentACarContext context = new RentACarContext())
+            using (EfRentACarContext context = new EfRentACarContext())
             {
                 var result = from c in context.Cars
                              join b in context.Brands

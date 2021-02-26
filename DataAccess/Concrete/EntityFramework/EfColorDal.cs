@@ -3,12 +3,13 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
-namespace DataAccess.Concrete.RentACar
+namespace DataAccess.Concrete.EntityFramework
 {
-    public class CustomerDal : EfEntityRepositoryBase<Customer, RentACarContext>, ICustomerDal
+    public class EfColorDal : EfEntityRepositoryBase<Color, EfRentACarContext>, IColorDal
     {
-
+        
     }
 }

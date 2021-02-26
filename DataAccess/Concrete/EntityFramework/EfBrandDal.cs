@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace DataAccess.Concrete.RentACar
+namespace DataAccess.Concrete.EntityFramework
 {
-    public class ColorDal : EfEntityRepositoryBase<Color, RentACarContext>, IColorDal
+    public class EfBrandDal : EfEntityRepositoryBase<Brand, EfRentACarContext>, IBrandDal
     {
         
     }

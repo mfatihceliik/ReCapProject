@@ -7,13 +7,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace DataAccess.Concrete.RentACar
+namespace DataAccess.Concrete.EntityFramework
 {
-    public class RentalDal : EfEntityRepositoryBase<Rental, RentACarContext>, IRentalDal
+    public class EfRentalDal : EfEntityRepositoryBase<Rental, EfRentACarContext>, IRentalDal
     {
         public List<RentalDetailDto> GetRentalDetail()
         {
-            using (RentACarContext context = new RentACarContext())
+            using (EfRentACarContext context = new EfRentACarContext())
             {
                 var result = from r in context.Rentals
                               join c in context.Cars
