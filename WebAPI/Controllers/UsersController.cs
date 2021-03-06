@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Core.Concrete;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace WebAPI.Controllers
         [HttpGet("getusersbyid")]
         public IActionResult GetUserById(int userId)
         {
-            var result = _userService.GetUserById(userId);
+            var result = _userService.GetByUserId(userId);
             if (result.Success)
             {
                 return Ok(result);

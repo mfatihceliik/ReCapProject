@@ -1,6 +1,9 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Aspects.Caching;
+using Core.Concrete;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -33,15 +36,28 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(UserValidator))]
+        [CacheRemoveAspect("IUserService.GetAll")]
         public IDataResult<List<User>> GetAll()
         {
             return new SuccessDataResult<List<User>>(_userDal.GetAll());
         }
 
-        [ValidationAspect(typeof(UserValidator))]
-        public IDataResult<User> GetUserById(int userId)
+        [CacheRemoveAspect("IUserService.GetByEmail")]
+        public IDataResult<User> GetByEmail(string email)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == userId));
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
+        }
+
+        [ValidationAspect(typeof(UserValidator))]
+        [CacheRemoveAspect("IUserService.GetByUserId")]
+        public IDataResult<User> GetByUserId(int userId)
+        {
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
         }
 
         [ValidationAspect(typeof(UserValidator))]

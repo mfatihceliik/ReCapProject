@@ -1,4 +1,6 @@
-﻿using Core.Utilities.Results;
+﻿using Core.Concrete;
+using Core.Entities.Concrete;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,8 @@ namespace Business.Abstract
         IResult Update(User user);
         IResult Delete(User user);
         IDataResult<List<User>> GetAll();
-        IDataResult<User> GetUserById(int userId);
+        IDataResult<User> GetByUserId(int userId);
+        IDataResult<List<OperationClaim>> GetClaims(User user);
+        IDataResult<User> GetByEmail(string email);
     }
 }

@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Aspects.Caching;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -43,6 +44,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.GetAll")]
         public IDataResult<List<Car>> GetAll()
         {
             if(DateTime.Now.Hour == 23)
@@ -53,6 +55,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.GetCarDetails")]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             if(DateTime.Now.Hour == 23)
@@ -63,6 +66,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.GetCarsByBrandId")]
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
             if(DateTime.Now.Hour == 23)
@@ -73,12 +77,14 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.GetCarsByColorId")]
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
         }
 
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.GetCarsById")]
         public IDataResult<List<Car>> GetCarsById(int carId)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.CarId == carId));

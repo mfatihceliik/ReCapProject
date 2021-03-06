@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         ICustomerService _customerService;
         public CustomersController(ICustomerService customerService)
         {
-            customerService = _customerService;
+            _customerService = customerService;
         }
 
         [HttpGet("getcustomerbyuserid")]

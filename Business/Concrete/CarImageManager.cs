@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Aspects.Caching;
 using Core.Utilities.Business;
 using Core.Utilities.FileHelper;
 using Core.Utilities.Results;
@@ -50,6 +51,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
+        [CacheRemoveAspect("ICarImageService.Get")]
         public IDataResult<CarImage> Get(int imageId)
         {
             
@@ -57,12 +59,14 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
+        [CacheRemoveAspect("ICarImageService.GetAll")]
         public IDataResult<List<CarImage>> GetAll()
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
+        [CacheRemoveAspect("ICarImageService.GetCarImagesByCarId")]
         public IDataResult<List<CarImage>> GetCarImagesByCarId(int carId)
         {
             IResult result = BusinessRules.Run(CheckIfCarImageNull(carId));

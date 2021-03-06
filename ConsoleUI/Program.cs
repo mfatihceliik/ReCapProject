@@ -1,7 +1,7 @@
 ﻿using Business.Concrete;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
-using DataAccess.Concrete.RentACar;
 using Entities.Concrete;
 using System;
 
@@ -11,9 +11,9 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new CarDal());
-            UserManager userManager = new UserManager(new UserDal());
-            RentalManager rentalManager = new RentalManager(new RentalDal());
+            CarManager carManager = new CarManager(new EfCarDal());
+            UserManager userManager = new UserManager(new EfUserDal());
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
             
             
             
@@ -70,14 +70,14 @@ namespace ConsoleUI
 
         private static void AddUser(UserManager userManager)
         {
-            User user = new User()
+            /*User user = new User()
             {
                 FirstName = "Eymen",
                 LastName = "Kaya",
                 Email = "eymen@outlook.com",
-                Password = "123456"
+                PasswordHash = "123456"
             };
-            userManager.Add(user);
+            userManager.Add(user);*/
         }
 
         private static void GetAllUsers(UserManager userManager)
@@ -85,7 +85,7 @@ namespace ConsoleUI
             var result = userManager.GetAll().Data;
             foreach (var users in result)
             {
-                Console.WriteLine(users.UserId + " / " + users.FirstName + " / " + users.LastName + " / " + users.Email + " / " + users.Password);
+                Console.WriteLine(users.Id + " / " + users.FirstName + " / " + users.LastName + " / " + users.Email + " / " + users.PasswordHash);
             }
         }
 
